@@ -28,10 +28,7 @@ A proposta é utilizar **filmes, séries e vídeos** como ferramenta para amplia
 ## 📸 Preview
 
 <div align="center">
-  <video width="500" controls>
-    <source src="./cortes_curtos_legendados/clip_1740.mp4" type="video/mp4">
-    Seu navegador não suporta vídeos incorporados.
-  </video>
+  <img src="img/clip_1740.gif" alt="Stickmen learning English" width="500">
 </div>
 
 ---
