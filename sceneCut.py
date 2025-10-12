@@ -3,6 +3,7 @@
 
 import os
 import re
+from moviepy import TextClip, VideoFileClip, CompositeVideoClip
 
 VIDEO_PATH = "./movies/Back.to.the.Future.1985.720p.BrRip.x264.YIFY.mp4"
 SRT_PATH = "./movies/Back.to.the.Future.1985.720p.BrRip.x264.YIFY.srt"
@@ -49,8 +50,30 @@ def load_srt(srt_path):
             if (end-start) >= MIN_DURATION:
                 subs.append((start, end, text))
 
-    print(subs)
     return subs
 
 
-load_srt(SRT_PATH)
+def cut_and_legend_video(video_path, start, end, legend):
+
+    # Corte no clip
+    cutClip = VideoFileClip(video_path).subclipped(start - 1, end + 1)
+
+    # Add legenda
+    texto =TextClip(text=legend,font_size=36,font='arial',duration=cutClip.duration,color='white',margin=(20,20),stroke_color='blue',stroke_width=0.3,transparent=True).with_position(('center','bottom'))
+
+
+
+    
+    composition = CompositeVideoClip([cutClip,texto])
+    
+    composition.preview()
+
+    
+
+
+if __name__ == "__main__":
+
+    data = load_srt(SRT_PATH)
+    start, end, text = data[30]
+    print(start,end, text)
+    cut_and_legend_video(VIDEO_PATH,start,end,text)
