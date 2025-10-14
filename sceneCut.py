@@ -3,12 +3,12 @@
 
 import os
 import re
-from moviepy import TextClip, VideoFileClip, CompositeVideoClip
+from moviepy import TextClip, VideoFileClip, afx
 
 VIDEO_PATH = "./movies/Back.to.the.Future.1985.720p.BrRip.x264.YIFY.mp4"
 SRT_PATH = "./movies/Back.to.the.Future.1985.720p.BrRip.x264.YIFY.srt"
+OUT_DIR = "./cortes_curto_legenda"
 MIN_DURATION = 2.5  # textos de minima duracao em segundos
-OUT_DIR = "cortes_curto_legenda/"
 
 
 def parse_timestamp(ts):
@@ -53,27 +53,24 @@ def load_srt(srt_path):
     return subs
 
 
-def cut_and_legend_video(video_path, start, end, legend):
-
-    # Corte no clip
-    cutClip = VideoFileClip(video_path).subclipped(start - 1, end + 1)
-
-    # Add legenda
-    texto =TextClip(text=legend,font_size=36,font='arial',duration=cutClip.duration,color='white',margin=(20,20),stroke_color='blue',stroke_width=0.3,transparent=True).with_position(('center','bottom'))
-
-
-
     
-    composition = CompositeVideoClip([cutClip,texto])
-    
-    composition.preview()
-
-    
-
-
 if __name__ == "__main__":
 
-    data = load_srt(SRT_PATH)
-    start, end, text = data[30]
-    print(start,end, text)
-    cut_and_legend_video(VIDEO_PATH,start,end,text)
+    os.makedirs(OUT_DIR, exist_ok=True) # criando diretorio de saida
+    lenPath = len(os.listdir(OUT_DIR))
+
+    data = load_srt(SRT_PATH)  
+
+    for i in data:
+
+        lenPath += 1 # Forma de numerar os arquivos de saida
+
+        start, end, text = i
+
+        print(start,end, text)
+
+        clip = VideoFileClip(VIDEO_PATH).subclipped(start -0.5 ,end +0.5).with_effects([afx.AudioNormalize()])   
+        clip.write_videofile(os.path.join(OUT_DIR, f"{lenPath+1}_{VIDEO_PATH.split("/")[2]}.mp4"), codec="libx264", audio_codec="aac")
+        
+        
+        
