@@ -1,18 +1,6 @@
-import json
+import os
 
-data = {
-  "firstName": "Sammy",
-  "lastName": "Shark",
-  "age": 30,
-  "isStudent": False,
-  "courses": [
-    {"title": "Intro to JSON", "credits": 3},
-    {"title": "Advanced Data", "credits": 4}
-  ],
-  "contact": {
-    "email": "s.shark@example.com",
-    "phone": None
-  }
-}
+DB_PATH = "./words_db.json"
 
-print(data)
+
+print(os.path.exists(DB_PATH))

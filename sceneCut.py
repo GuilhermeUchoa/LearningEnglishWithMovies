@@ -9,7 +9,7 @@ import json
 
 VIDEO_PATH = "./movies/Back.to.the.Future.1985.720p.BrRip.x264.YIFY.mp4"
 SRT_PATH = "./movies/Back.to.the.Future.1985.720p.BrRip.x264.YIFY.srt"
-OUT_DIR = "./cortes_curto_legenda"
+OUT_DIR = "./cortes_curtos_legendados"
 MIN_DURATION = 2.5  # textos de minima duracao em segundos
 
 
@@ -55,19 +55,17 @@ def load_srt(srt_path):
     return subs
 
 
-    
 if __name__ == "__main__":
 
-    os.makedirs(OUT_DIR, exist_ok=True) # criando diretorio de saida
+    os.makedirs(OUT_DIR, exist_ok=True)  # criando diretorio de saida
     lenPath = len(os.listdir(OUT_DIR))
 
-    data = load_srt(SRT_PATH)  
-
+    data = load_srt(SRT_PATH)
 
     jsonToSave = []
     for i in data:
 
-        lenPath += 1 # Forma de numerar os arquivos de saida
+        lenPath += 1  # Forma de numerar os arquivos de saida
 
         start, end, text = i
 
@@ -75,19 +73,17 @@ if __name__ == "__main__":
             'MOVIE': VIDEO_PATH.split('/')[-1],
             'START': start,
             'END': end,
+            'CLIP_NAME': f'clip_{lenPath}.mp4',
             'TEXT': text
         }
 
-        jsonToSave.append(dadosToSave) 
+        # Realizando o corte do video com moviepy
+        clip = VideoFileClip(VIDEO_PATH).subclipped(start -0.5 ,end +0.5).with_effects([afx.AudioNormalize()])
+        clip.write_videofile(os.path.join(OUT_DIR, f"clip_{lenPath}.mp4"), codec="libx264", audio_codec="aac")
 
-    print(jsonToSave)    
+        # Adicionando dados para salvar no banco de dados
+        jsonToSave.append(dadosToSave)
 
+    # Salvando dados no banco de dados
     wdb.save_words_db(jsonToSave)
 
-
-
-    # clip = VideoFileClip(VIDEO_PATH).subclipped(start -0.5 ,end +0.5).with_effects([afx.AudioNormalize()])   
-    # clip.write_videofile(os.path.join(OUT_DIR, f"{lenPath+1}_{VIDEO_PATH.split("/")[2]}.mp4"), codec="libx264", audio_codec="aac")
-    
-    
-        
