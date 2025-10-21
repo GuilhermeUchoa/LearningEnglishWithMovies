@@ -4,6 +4,8 @@
 import os
 import re
 from moviepy import TextClip, VideoFileClip, afx
+import words_db as wdb
+import json
 
 VIDEO_PATH = "./movies/Back.to.the.Future.1985.720p.BrRip.x264.YIFY.mp4"
 SRT_PATH = "./movies/Back.to.the.Future.1985.720p.BrRip.x264.YIFY.srt"
@@ -61,16 +63,31 @@ if __name__ == "__main__":
 
     data = load_srt(SRT_PATH)  
 
+
+    jsonToSave = []
     for i in data:
 
         lenPath += 1 # Forma de numerar os arquivos de saida
 
         start, end, text = i
 
-        print(start,end, text)
+        dadosToSave = {
+            'MOVIE': VIDEO_PATH.split('/')[-1],
+            'START': start,
+            'END': end,
+            'TEXT': text
+        }
 
-        clip = VideoFileClip(VIDEO_PATH).subclipped(start -0.5 ,end +0.5).with_effects([afx.AudioNormalize()])   
-        clip.write_videofile(os.path.join(OUT_DIR, f"{lenPath+1}_{VIDEO_PATH.split("/")[2]}.mp4"), codec="libx264", audio_codec="aac")
-        
-        
+        jsonToSave.append(dadosToSave) 
+
+    print(jsonToSave)    
+
+    wdb.save_words_db(jsonToSave)
+
+
+
+    # clip = VideoFileClip(VIDEO_PATH).subclipped(start -0.5 ,end +0.5).with_effects([afx.AudioNormalize()])   
+    # clip.write_videofile(os.path.join(OUT_DIR, f"{lenPath+1}_{VIDEO_PATH.split("/")[2]}.mp4"), codec="libx264", audio_codec="aac")
+    
+    
         
