@@ -25,12 +25,6 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              },
-              "src/assets",
-              {
-                "glob": "**/*",
-                "input": "C:/Users/GuilhermeUchoa/Documents/developer/LearningEnglishWithMovies/cortes_curtos_legendados",
-                "output": "/assets/cortes_curtos_legendados"
               }
             ],
             "styles": ["src/styles.scss"]

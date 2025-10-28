@@ -1,7 +1,7 @@
 import os
 import json
 
-DB_PATH = "./words_db.json"
+DB_PATH = "./frontEnd/public/words_db.json"
 
 
 def load_words_db():

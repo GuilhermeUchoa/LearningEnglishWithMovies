@@ -1,0 +1,27 @@
+<div class="container">
+  <span>{{ numberVideo + 1 }}/{{ videoData.length }}</span>
+
+  <div class="video-wrapper">
+    <button class="Buttons left" (click)="previousButton()">
+      <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960"
+        width="40px" fill="#1f1f1f">
+        <path d="M560.67-240 320-480.67l240.67-240.66L608-674 414.67-480.67 608-287.33 560.67-240Z" />
+      </svg>
+    </button>
+
+    <video [src]="'/cortes_curtos_legendados/' + objectVideo.CLIP_NAME"
+      class="video-container" controls autoplay muted loop>
+    </video>
+
+    <button class="Buttons right" (click)="nextButton()">
+      <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960"
+        width="40px" fill="#1f1f1f">
+        <path d="M521.33-480.67 328-674l47.33-47.33L616-480.67 375.33-240 328-287.33l193.33-193.34Z" />
+      </svg>
+    </button>
+  </div>
+
+  <p class="legenda">
+    {{ objectVideo.TEXT }}
+  </p>
+</div>

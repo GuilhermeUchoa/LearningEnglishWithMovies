@@ -9,7 +9,7 @@ import json
 
 VIDEO_PATH = "./movies/Back.to.the.Future.1985.720p.BrRip.x264.YIFY.mp4"
 SRT_PATH = "./movies/Back.to.the.Future.1985.720p.BrRip.x264.YIFY.srt"
-OUT_DIR = "./cortes_curtos_legendados"
+OUT_DIR = "./frontEnd/public/cortes_curtos_legendados"
 MIN_DURATION = 2.5  # textos de minima duracao em segundos
 
 

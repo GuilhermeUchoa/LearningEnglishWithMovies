@@ -1,14 +1,1 @@
-<div class="Container">
-
-
-  <div>
-    <button (click)="lastVideo()"><</button>
-        <video id="videoPlayer" width="640" height="480" autoplay muted playsinline controls>
-          <source [src]="[linkVideo]" type="video/mp4" />
-          Seu navegador não suporta vídeos HTML5.
-        </video>
-        <button (click)="nextVideo()">></button>
-
-  </div>
-
-</div>
+<router-outlet></router-outlet>

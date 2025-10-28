@@ -1,0 +1,47 @@
+div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* centraliza horizontalmente */
+    align-items: center;
+    /* centraliza verticalmente */
+    text-align: center;
+    border-radius: 10px;
+
+}
+
+
+
+
+.search-tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 75%;
+    height: 2rem;
+    border: none;
+    margin: 10px;
+    padding: 0.2rem;
+    font-size: large;
+    font-style: italic;
+    font-weight: 800;
+    border-bottom: 1px solid gray;
+   
+
+    transition: all 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+
+
+
+}
+
+
+.search-tab:focus {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid black;
+
+    transition: all 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+    width: 100%;
+    
+}
